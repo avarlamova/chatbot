@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Contacts from './contacts';
 
-export default class Screen extends Component {
-    render() {
+export default function Screen ({login}) {
+
         return (
-            <div>
-                Hi it's screen
-            </div>
+            <Contacts login = {login} />
         )
-    }
+    
 }

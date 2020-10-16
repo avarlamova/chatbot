@@ -10,7 +10,7 @@ export default function Login({onLoginSubmit}) {
     };
 
     return (
-        <div>
+        <div className="container text-center" >
             <form onSubmit={onSubmit}>
                 <label>Enter your login</label>
                 <input type="text" ref={login} required></input>

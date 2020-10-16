@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Login from './loginpage';
 import useLocalStorage from '../hooks/localstorage.js' ;
 import Screen from './screen'
@@ -6,14 +6,13 @@ import Screen from './screen'
 
 function App() {
 
-  const [login, setLogin] = useLocalStorage('login');
+  const [login, setLogin] = useState();
 
   return (
-    <div> 
-        {login} ? 
+      <div> 
         <Screen 
         login = {login}
-        /> : 
+        />
         <Login onLoginSubmit = {setLogin} />
         </div>
   );
