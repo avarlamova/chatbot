@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+
 
 export default function Contacts( {login} ) {
 
     const [activeContact, setActiveContact] = useState('Mary');
 
     return (
-        <nav className = "nav nav-tabs" activeKey = {activeContact}>
+        <nav className = "nav nav-tabs" activeKey = {activeContact} onSelect= {setActiveContact}>
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contacts</a>
@@ -20,3 +21,4 @@ export default function Contacts( {login} ) {
         </nav>
     )
 }
+/* add new contact button'*/
