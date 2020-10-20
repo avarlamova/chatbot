@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Contacts from './contacts';
 import Chats from './chats';
-import Newchat from './newchat';
 
 export default function Screen ({login}) {
 
@@ -10,7 +9,6 @@ export default function Screen ({login}) {
             <>
             <Contacts login = {login} />
             <Chats />
-            <Newchat />
             </>
         )
     
