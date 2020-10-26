@@ -6,6 +6,7 @@ export default function Contacts( {login} ) {
     const [activeContact, setActiveContact] = useState('Mary');
 
     return (
+        <>
         <nav className = "nav nav-tabs" activeKey = {activeContact} onSelect= {setActiveContact}>
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -19,6 +20,8 @@ export default function Contacts( {login} ) {
                 </li>
             </ul>            
         </nav>
+        <button> New contact </button>
+        </>
     )
 }
 /* add new contact button'*/
