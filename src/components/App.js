@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Login from './loginpage';
 import useLocalStorage from '../hooks/localstorage.js' ;
 import Screen from './screen';
@@ -8,15 +8,11 @@ import Newchat from './newchat';
 
 function App() {
 
-  const [login, setLogin] = useState();
+  const [login, setLogin] = useLocalStorage('login');
 
   return (
       <div> 
-        <Screen 
-        login = {login}
-        />
-        <Login onLoginSubmit = {setLogin} />
-        <Newchat />
+        {login ? <Screen login = {login}/>: <Login setLogin = {setLogin} />}
         </div>
   );
 
