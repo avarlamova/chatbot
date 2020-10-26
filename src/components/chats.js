@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Newchat from './newchat';
 
 
 export default function Chats() {
@@ -18,6 +17,8 @@ export default function Chats() {
                 </li>
             </ul>            
         </nav>
+
+        <button> New chat </button>
 
         <div class="modal" role="dialog">
         <div class="modal-dialog" role="document">
@@ -38,9 +39,7 @@ export default function Chats() {
         </div>
         </div>
         </div>
-        <Newchat />
         </>
     )
 }
 
-/* add new chat button'*/

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Contacts from './contacts';
 import Chats from './chats';
-import {Tab, Nav} from 'react-bootstrap';
+import {Tab, Nav, Modal} from 'react-bootstrap';
+import NewChat from './newchat';
+import NewContact from './newcontact'
 
 export default function Screen ({login}) {
-        const [activeTab, setActiveTab] = useState('contacts')
+        const [activeTab, setActiveTab] = useState('contacts');
+        const chatIsOpen = activeTab === 'chats';
         return (
-               /* tab container? */
         <div> 
             {login}
             <Tab.Container> 
@@ -31,6 +33,12 @@ export default function Screen ({login}) {
                         </Tab.Pane>
                 </Tab.Content>
             </Tab.Container>
+
+            <Modal>
+                    {chatIsOpen} ? 
+                    <NewChat/>
+                    <NewContact />
+            </Modal>
         </div>
         )
     

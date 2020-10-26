@@ -3,7 +3,7 @@ import { Modal, Form, Button } from 'react-bootstrap'
 
 
 
-export default function Newchat() {
+export default function NewChat() {
 
 
     return (  
