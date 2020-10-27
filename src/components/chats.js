@@ -18,8 +18,6 @@ export default function Chats() {
             </ul>            
         </nav>
 
-        <button> New chat </button>
-
         <div class="modal" role="dialog">
         <div class="modal-dialog" role="document">
         <div class="modal-content">

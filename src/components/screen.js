@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import Contacts from './contacts';
 import Chats from './chats';
-import {Tab, Nav, Modal} from 'react-bootstrap';
+import {Tab, Nav, Modal, Button} from 'react-bootstrap';
 import NewChat from './newchat';
 import NewContact from './newcontact'
 
 export default function Screen ({login}) {
         const [activeTab, setActiveTab] = useState('contacts');
         const chatIsOpen = activeTab === 'chats';
+        const [modalOpen, setModalOpen] = useState(false);
+
+        function closeModal () {
+        setModalOpen(false)
+        }
+
+        function openModal () {
+        setModalOpen(true)
+        }
+
         return (
         <div> 
             {login}
@@ -32,12 +42,16 @@ export default function Screen ({login}) {
                                 <Chats /> 
                         </Tab.Pane>
                 </Tab.Content>
+
+                <Button onClick= {openModal}>
+                        New conversation
+                </Button>
             </Tab.Container>
 
-            <Modal>
+            <Modal show = {modalOpen}>
                     {chatIsOpen} ? 
-                    <NewChat/>
-                    <NewContact />
+                    <NewChat close = {closeModal}/>
+                    <NewContact close = {closeModal} />
             </Modal>
         </div>
         )
