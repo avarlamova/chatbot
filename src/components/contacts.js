@@ -20,7 +20,6 @@ export default function Contacts( {login} ) {
                 </li>
             </ul>            
         </nav>
-        <button> New contact </button>
         </>
     )
 }
