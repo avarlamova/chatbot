@@ -3,12 +3,11 @@ import { Modal, Form, Button } from 'react-bootstrap'
 
 
 
-export default function NewChat() {
+export default function NewChat({closeModal}) {
 
 
     return (  
         <>
-    <Modal>
         <Modal.Header>
             New chat
         </Modal.Header>
@@ -17,7 +16,6 @@ export default function NewChat() {
                 <Form.Label> Add name </Form.Label>
             </Form>
         </Modal.Body>
-    </Modal>
     </>
     )
 }
