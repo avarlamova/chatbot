@@ -43,15 +43,16 @@ export default function Screen ({login}) {
                         </Tab.Pane>
                 </Tab.Content>
 
-                <Button onClick= {openModal}>
+                <Button onClick={()=> setModalOpen(true)}>
                         New conversation
                 </Button>
             </Tab.Container>
 
             <Modal show = {modalOpen}>
-                    {chatIsOpen} ? 
-                    <NewChat close = {closeModal}/>
-                    <NewContact close = {closeModal} />
+                    {chatIsOpen ?   
+                    <NewChat close = {closeModal}/>  :
+                    <NewContact close = {closeModal} /> 
+                    }
             </Modal>
         </div>
         )
