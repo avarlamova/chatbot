@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import useLocalStorage from '../hooks/localstorage';
 
 
 export default function Contacts( {login} ) {
 
+    const contacts = localStorage.getItem('contacts')
     const [activeContact, setActiveContact] = useState('Mary');
 
     return (
@@ -12,12 +14,7 @@ export default function Contacts( {login} ) {
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contacts</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" eventKey = "Jack" href="#">Jack</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" eventKey = "Mary" href="#">Mary</a>
-                </li>
+                {contacts}
             </ul>            
         </nav>
         </>
