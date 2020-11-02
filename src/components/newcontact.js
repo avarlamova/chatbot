@@ -1,19 +1,13 @@
 import React, {useRef} from 'react'
 import { Modal, Form, Button } from 'react-bootstrap'
-import useLocalStorage from '../hooks/localstorage'
+import { useContacts } from '../contexts/contactsProvider'
 
 
 export default function NewContact() {
 
     const nameRef = useRef();
     const logRef = useRef();
-    const [contacts, setContacts] = useLocalStorage('contacts', [])
-
-    function createContact (login, name) {
-        setContacts(prevContacts =>  {
-            return [...prevContacts, {login, name}]
-        })
-    }
+    const {createContact} = useContacts() 
 
     function submitForm () {
         createContact(logRef.current.value, nameRef.current.value)

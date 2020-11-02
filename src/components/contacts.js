@@ -10,9 +10,9 @@ export default function Contacts( {login} ) {
     return (
         <>
         <nav className = "nav nav-tabs" activeKey = {activeContact} onSelect= {setActiveContact}>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacts</a>
+            <ul className="nav flex-column">
+                <li className="nav-item">
+                    <a className="nav-link" href="#">Contacts</a>
                 </li>
                 {contacts}
             </ul>            
