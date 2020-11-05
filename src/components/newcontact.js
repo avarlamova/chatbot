@@ -11,7 +11,6 @@ export default function NewContact() {
 
     function submitForm () {
         createContact(logRef.current.value, nameRef.current.value)
-        //closeWindow();
     }
 
     return (
