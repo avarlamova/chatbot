@@ -11,9 +11,10 @@ function App() {
   const [login, setLogin] = useLocalStorage('login');
 
   const screen = (
-    <ContactsProvider>
+    
+    //<ContactsProvider>
       <Screen login = {login} />
-    </ContactsProvider>
+    //</ContactsProvider>
   )
 
   return (

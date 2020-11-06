@@ -36,7 +36,7 @@ export default function Screen ({login}) {
                 </Nav>
                 <Tab.Content> 
                         <Tab.Pane eventKey="contacts">
-                                <Contacts /> 
+                         <Contacts /> 
                         </Tab.Pane>
                         <Tab.Pane eventKey="chats">
                                 <Chats /> 
@@ -44,7 +44,7 @@ export default function Screen ({login}) {
                 </Tab.Content>
 
                 <Button onClick={()=> setModalOpen(true)}>
-                        New conversation
+                        New contact
                 </Button>
             </Tab.Container>
 
