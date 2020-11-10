@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
 import { Modal, Form, Button } from 'react-bootstrap'
-import {useContacts} from '../contexts/contactsProvider'
  
 
 export default function NewChat({closeModal}) {

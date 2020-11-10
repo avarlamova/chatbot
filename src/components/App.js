@@ -12,9 +12,9 @@ function App() {
 
   const screen = (
     
-    //<ContactsProvider>
+    <ContactsProvider>
       <Screen login = {login} />
-    //</ContactsProvider>
+    </ContactsProvider>
   )
 
   return (

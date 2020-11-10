@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, { useState} from 'react';
 import { useContacts } from '../contexts/contactsProvider';
 
 
 export default function Contacts( {login} ) {
 
-    const contacts = localStorage.getItem('contacts').split(',');
+    const {contacts} = useContacts()
     const [activeContact, setActiveContact] = useState('Jack');
 
     return (
@@ -13,7 +13,7 @@ export default function Contacts( {login} ) {
             <ul class="nav flex-column">
                 {contacts.map(contact => (
                 <li class="nav-item">
-                     <a class="nav-link" href="#">{contact}</a>
+                     <a class="nav-link" href="#" >{contact}</a>
                  </li>
                 ))}
                 <li class="nav-item">
