@@ -21,7 +21,7 @@ export default function Screen ({login}) {
         return (
         <div> 
             {login}
-            <Tab.Container> 
+            <Tab.Container activeKey={activeTab} onSelect={setActiveTab}>  
                 <Nav variant="tabs"> 
                 <Nav.Item> 
                         <Nav.Link eventKey="contacts">
@@ -44,10 +44,10 @@ export default function Screen ({login}) {
                 </Tab.Content>
 
                 <Button onClick={()=> setModalOpen(true)}>
-                        New contact
+                New {chatIsOpen ? 'chat' : 'contact'}
                 </Button>
             </Tab.Container>
-
+            
             <Modal show = {modalOpen}>
                     {chatIsOpen ?   
                     <NewChat close = {closeModal}/>  :

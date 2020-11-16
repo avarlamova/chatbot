@@ -7,32 +7,32 @@ export default function Chats() {
 
     return (
         <>
-        <nav className = "nav nav-tabs" activeKey = {activeChat} onSelect= {setActiveChat}>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Conversations</a>
+        <nav className = "nav nav-tabs" activekey = {activeChat} onSelect= {setActiveChat}>
+            <ul className="nav flex-column">
+                <li className="nav-item">
+                    <a className="nav-link" href="#">Conversations</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" eventKey = "Jack" href="#">Jack</a>
+                <li className="nav-item">
+                    <a className="nav-link" eventkey = "Jack" href="#">Jack</a>
                 </li>
             </ul>            
         </nav>
 
-        <div class="modal" role="dialog">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div className="modal" role="dialog">
+        <div className="modal-dialog" role="document">
+        <div className="modal-content">
+            <div className="modal-header">
+            <h5 className="modal-title">Modal title</h5>
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
             <p>Modal body text goes here.</p>
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save changes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div className="modal-footer">
+            <button type="button" className="btn btn-primary">Save changes</button>
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
         </div>

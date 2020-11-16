@@ -9,17 +9,14 @@ export default function Contacts( {login} ) {
 
     return (
     <>
-       <nav className = "nav nav-tabs" activeKey = {activeContact} onSelect= {setActiveContact}>
-            <ul class="nav flex-column">
+       <nav className = "nav flex-column" activekey = {activeContact} onSelect= {setActiveContact}>
+       <ul className="list-group">
                 {contacts.map(contact => (
-                <li class="nav-item">
-                     <a class="nav-link" href="#" >{contact}</a>
+                <li key = {contact.login} className="list-group-item">
+                     <a className="nav-link"  href="#" >{contact.name}</a>
                  </li>
                 ))}
-                <li class="nav-item">
-                    <a class="nav-link" eventKey = "Jack" href="#">Jack</a>
-                </li>
-            </ul>            
+        </ul>            
         </nav>
     </>
     )
