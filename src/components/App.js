@@ -3,6 +3,7 @@ import Login from './loginpage';
 import useLocalStorage from '../hooks/localstorage.js' ;
 import Screen from './screen';
 import {ContactsProvider} from '../contexts/contactsProvider'
+import {ChatsProvider} from '../contexts/chatsProvider'
 
 
 
@@ -13,7 +14,9 @@ function App() {
   const screen = (
     
     <ContactsProvider>
+    <ChatsProvider>
       <Screen login = {login} />
+    </ChatsProvider>
     </ContactsProvider>
   )
 

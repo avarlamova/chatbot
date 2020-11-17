@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import {useContacts} from '../contexts/contactsProvider'
+import {useChats} from '../contexts/chatsProvider'
 import { Modal, Form, Button } from 'react-bootstrap'
  
 
 export default function NewChat({closeModal}) {
 
-    const {contacts} = useContacts()
+    const {contacts} = useContacts();
+    const [selectedContacts, setSelectedContacts] = useState(['Dima']);
+    const {createChat} = useChats();
+
 
     function handleSubmit () {
-        console.log(selectedContacts)
+        createChat (selectedContacts);
+        closeModal();
     }
 
     function handleChange (login) {
@@ -22,9 +27,6 @@ export default function NewChat({closeModal}) {
             }
           })
     }
-
-    const [selectedContacts, setSelectedContacts] = useState(['Dima'])
-
 
     return (  
         <>
@@ -46,8 +48,8 @@ export default function NewChat({closeModal}) {
                         </Form.Check>
                     </Form.Group>
                 ))}
+                <Button type="submit"> Start the conversation </Button>
                 </Form>
-            <Button type="submit"> Start the conversation </Button>
         </Modal.Body>
     </>
     )
