@@ -11,9 +11,10 @@ export default function NewChat({closeModal}) {
     const {createChat} = useChats();
 
 
-    function handleSubmit () {
+    function handleSubmit (e) {
+        e.preventDefault();
         createChat (selectedContacts);
-        closeModal();
+       // closeModal();
     }
 
     function handleChange (login) {

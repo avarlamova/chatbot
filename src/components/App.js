@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Login from './loginpage';
 import useLocalStorage from '../hooks/localstorage.js' ;
-import Screen from './screen';
+import Sidebar from './sidebar';
 import {ContactsProvider} from '../contexts/contactsProvider'
-import {ChatsProvider} from '../contexts/chatsProvider'
-
-
+import {ChatsProvider} from '../contexts/chatsProvider';
+import {useChats} from '../contexts/chatsProvider'
+import ConversationWindow from './conversationWindow';
 
 function App() {
 
   const [login, setLogin] = useLocalStorage('login');
+  const selectedChat = true;
 
   const screen = (
     
     <ContactsProvider>
     <ChatsProvider>
-      <Screen login = {login} />
+      <Sidebar login = {login} />
+      {selectedChat ? <ConversationWindow /> : <div>{'chat not selected'}</div>}
     </ChatsProvider>
     </ContactsProvider>
   )

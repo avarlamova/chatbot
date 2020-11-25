@@ -5,7 +5,7 @@ import {Tab, Nav, Modal, Button} from 'react-bootstrap';
 import NewChat from './newchat';
 import NewContact from './newcontact'
 
-export default function Screen ({login}) {
+export default function Sidebar ({login}) {
         const [activeTab, setActiveTab] = useState('contacts');
         const chatIsOpen = activeTab === 'chats';
         const [modalOpen, setModalOpen] = useState(false);
@@ -54,6 +54,7 @@ export default function Screen ({login}) {
                     <NewContact close = {closeModal} /> 
                     }
             </Modal>
+
         </div>
         )
     
