@@ -15,9 +15,11 @@ function App() {
   const screen = (
     
     <ContactsProvider>
-    <ChatsProvider>
+    <ChatsProvider login = {login}>
+      <div className="d-flex">
       <Sidebar login = {login} />
       {selectedChat ? <ConversationWindow /> : <div>{'chat not selected'}</div>}
+      </div>
     </ChatsProvider>
     </ContactsProvider>
   )

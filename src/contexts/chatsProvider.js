@@ -8,7 +8,7 @@ export function useChats() {
   return useContext(ChatsContext)
 }
 
-export function ChatsProvider({children}) {
+export function ChatsProvider({login, children}) {
 
   const [chats, setChats] = useLocalStorage('chats', []);
   const [chatIndex, setChatindex] = useState(0);
@@ -19,6 +19,22 @@ export function ChatsProvider({children}) {
       return [...prevChats, {receivers, messages: [] }]
     })
   }
+
+  function sendMessage (receivers, message) {
+    addMessageToChat({receivers,message, sender: login})
+  }
+
+  function addMessageToChat({receivers, message, sender: login}) {
+    setChats(prevChats => {
+      const newMessage = {sender, message}
+      let hasChanged = false;
+      if (hasChanged) {
+//
+      }
+      else return [...prevChats, {receivers, messages: [newMessage]}]
+    })
+  }
+
 
   const formattedChats = chats.map((chat, index) => {
     const receivers = chat.receivers.map(receiver => {
@@ -36,7 +52,8 @@ export function ChatsProvider({children}) {
     chats: formattedChats,
     selectChat: setChatindex,
     selectedChat: formattedChats[chatIndex],
-    createChat
+    createChat,
+    sendMessage
   }
 
   return (
