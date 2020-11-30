@@ -24,12 +24,29 @@ export function ChatsProvider({login, children}) {
     addMessageToChat({receivers,message, sender: login})
   }
 
+  function equalArrays(arr1, arr2) {
+    if (arr1.length!==arr2.length) return false
+    arr1.sort();
+    arr2.sort();
+    return arr1.every(el, index => {
+      return el === arr2[index]
+    })
+  }
+
   function addMessageToChat({receivers, message, sender: login}) {
     setChats(prevChats => {
       const newMessage = {sender, message}
+      const newChats = prevChats.map(chat => {
+        if (equalArrays(chat.receivers,receivers)) {
+          hasChanged = true
+          return {...chats, messages:[...chats.messages, newMessage]}
+        }
+        return chat
+
+      })
       let hasChanged = false;
       if (hasChanged) {
-//
+        return newChats
       }
       else return [...prevChats, {receivers, messages: [newMessage]}]
     })
