@@ -19,10 +19,25 @@ export default function ConversationWindow() {
     }
 
     return (
-        <div className="d-flex flex-column flex-grow-1">
-            <div className="flex-grow-1 overflow-auto">
+    <div className="d-flex flex-column flex-grow-1">
+      <div className="flex-grow-1 overflow-auto">
+        <div className="d-flex flex-column align-items-start justify-content-end">
+          {selectedChat.messages.map((msg, index) => {
+            const lastMessage = selectedChat.messages.length - 1 === index
+            return (
+              <div key={index}>
+                <div>
+                  {msg.message}
+                </div>
+                <div className={msg.fromMe ? 'text-right' : ''}>
+                  {msg.fromMe ? 'You' : msg.senderName}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
 
-            </div>
             <form onSubmit={handleSubmit}> 
                 <div className="form-group">
                     <input onChange={handleChange} type="textarea" className="form-control" required value={message} />
@@ -34,3 +49,4 @@ export default function ConversationWindow() {
         </div>
     )
 }
+
