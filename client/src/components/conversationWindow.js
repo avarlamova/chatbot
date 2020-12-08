@@ -1,5 +1,7 @@
 import React, { useState, useCallback} from 'react'
 import {useChats} from '../contexts/chatsProvider'
+import { Form, InputGroup, Button } from 'react-bootstrap'
+
 
 export default function ConversationWindow() {
 
@@ -26,7 +28,7 @@ export default function ConversationWindow() {
     <div className="d-flex flex-column flex-grow-1">
       <div className="flex-grow-1 overflow-auto">
         <div className="d-flex flex-column align-items-start justify-content-end">
-          {selectedChat.messages.map((msg, index) => {
+          {selectedChat ? selectedChat.messages.map((msg, index) => {
             const lastMessage = selectedChat.messages.length - 1 === index
             return (
               <div key={index}
@@ -39,18 +41,26 @@ export default function ConversationWindow() {
                 </div>
               </div>
             )
-          })}
+          }) : ''}
         </div>
       </div>
-            <form onSubmit={handleSubmit}> 
-                <div className="form-group">
-                    <input onChange={handleChange} type="textarea" className="form-control" required pa={message} />
-                <button  type="submit" className="btn btn-info">
-                Send message
-                </button>
-                </div>
-            </form>
-        </div>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="m-2">
+          <InputGroup>
+            <Form.Control
+              as="textarea"
+              required
+              value={message}
+              onChange={handleChange}
+              style={{ height: '75px', resize: 'none' }}
+            />
+            <InputGroup.Append>
+              <Button type="submit">Send</Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form.Group>
+      </Form>
+</div>
     )
 }
 

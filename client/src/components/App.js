@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Login from './loginpage';
 import useLocalStorage from '../hooks/localstorage.js' ;
 import Sidebar from './sidebar';
 import {ContactsProvider} from '../contexts/contactsProvider'
 import {ChatsProvider} from '../contexts/chatsProvider';
-import {useChats} from '../contexts/chatsProvider'
 import ConversationWindow from './conversationWindow';
 import { SocketProvider } from '../contexts/socketProvider';
 

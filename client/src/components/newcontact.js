@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef} from 'react'
 import { Modal, Form, Button } from 'react-bootstrap'
 import { useContacts } from '../contexts/contactsProvider'
 
@@ -12,6 +12,7 @@ export default function NewContact({ closeModal }) {
 
     function submitForm () {
         createContact(logRef.current.value, nameRef.current.value);
+        closeModal();
     }
 
     return (
