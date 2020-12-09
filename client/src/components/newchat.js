@@ -7,14 +7,14 @@ import { Modal, Form, Button } from 'react-bootstrap'
 export default function NewChat({closeModal}) {
 
     const {contacts} = useContacts();
-    const [selectedContacts, setSelectedContacts] = useState(['Dima']);
+    const [selectedContacts, setSelectedContacts] = useState([]);
     const {createChat} = useChats();
 
 
     function handleSubmit (e) {
         e.preventDefault();
         createChat (selectedContacts);
-       // closeModal();
+        closeModal();
     }
 
     function handleChange (login) {

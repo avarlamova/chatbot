@@ -14,10 +14,6 @@ export default function Sidebar ({login}) {
         setModalOpen(false)
         }
 
-        function openModal () {
-        setModalOpen(true)
-        }
-
         return (
         <div> 
             {login}
@@ -48,10 +44,10 @@ export default function Sidebar ({login}) {
                 </Button>
             </Tab.Container>
             
-            <Modal show = {modalOpen}>
+            <Modal show = {modalOpen} onHide = {closeModal}>
                     {chatIsOpen ?   
-                    <NewChat close = {closeModal}/>  :
-                    <NewContact close = {closeModal} /> 
+                    <NewChat closeModal = {closeModal}/>  :
+                    <NewContact closeModal = {closeModal} /> 
                     }
             </Modal>
 

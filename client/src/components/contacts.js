@@ -5,7 +5,7 @@ import { useContacts } from '../contexts/contactsProvider';
 export default function Contacts( {login} ) {
 
     const {contacts} = useContacts()
-    const [activeContact, setActiveContact] = useState('Jack');
+    const [activeContact, setActiveContact] = useState();
 
     return (
     <>

@@ -2,8 +2,6 @@ import React, {useRef} from 'react'
 import { Modal, Form, Button } from 'react-bootstrap'
 import { useContacts } from '../contexts/contactsProvider'
 
-
-
 export default function NewContact({ closeModal }) {
 
     const nameRef = useRef()
