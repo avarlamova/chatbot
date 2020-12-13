@@ -14,14 +14,14 @@ function App() {
 
   const screen = (
     <SocketProvider login = {login}> 
-    <ContactsProvider>
-    <ChatsProvider login = {login}>
-      <div className="d-flex">
-      <Sidebar login = {login} />
-      {selectedChat ? <ConversationWindow /> : <div>{'chat not selected'}</div>}
-      </div>
-    </ChatsProvider>
-    </ContactsProvider>
+      <ContactsProvider>
+        <ChatsProvider login = {login}>
+          <div className="d-flex">
+          <Sidebar login = {login} />
+          {selectedChat ? <ConversationWindow /> : <div>{'chat not selected'}</div>}
+          </div>
+        </ChatsProvider>
+      </ContactsProvider>
     </SocketProvider>
   )
 

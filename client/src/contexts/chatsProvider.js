@@ -22,14 +22,7 @@ export function ChatsProvider({ login, children }) {
     })
   }
 
-  function equalArrays(arr1, arr2) {
-    if (arr1.length !== arr2.length) return false
-    arr1.sort()
-    arr2.sort()
-    return arr1.every((element, index) => {
-      return element === arr2[index]
-    })
-  }
+
 //will be called 1) from server when we receive a message 2) when we send a msg
   const addMessageToChat = useCallback (({ receivers, message, sender }) => {
     setChats(prevChats => {
@@ -56,7 +49,7 @@ export function ChatsProvider({ login, children }) {
       }
     })
   },[setChats] )
-  
+
   useEffect(() => {
     if (socket == null) return 
     socket.on('receive-message', addMessageToChat)
@@ -108,3 +101,11 @@ export function ChatsProvider({ login, children }) {
   )
 }
 
+function equalArrays(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false
+  arr1.sort()
+  arr2.sort()
+  return arr1.every((element, index) => {
+    return element === arr2[index]
+  })
+}

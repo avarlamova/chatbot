@@ -31,11 +31,8 @@ export default function NewChat({closeModal}) {
 
     return (  
         <>
-        <Modal.Header>
+        <Modal.Header closeButton>
                 New chat
-                <Button className="btn-secondary" onClick={closeModal}>
-                    Close
-                </Button>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>

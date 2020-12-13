@@ -12,9 +12,8 @@ export default function Chats() {
           key={index}
           action
           onClick={() => selectChat(index)}
-          active={chat.selected}
-        >
-          {chat.receivers.map(r => r.name).join(', ')}
+          active={chat.selected}>
+          {chat.receivers.map(receiver => receiver.name.name).join(', ')}
         </ListGroup.Item>
       ))}
     </ListGroup>

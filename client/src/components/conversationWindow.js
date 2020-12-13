@@ -32,11 +32,12 @@ export default function ConversationWindow() {
             const lastMessage = selectedChat.messages.length - 1 === index
             return (
               <div key={index}
-              ref={lastMessage ? setRef : null}>
-                <div>
+              ref={lastMessage ? setRef : null}
+              className={`d-flex flex-column ${message.fromMe ? 'align-self-end align-items-end' : 'align-items-start'}`}>
+                <div className={`rounded m-1 p-2 ${message.fromMe ? 'bg-primary text-white' : 'border'}`}>
                   {msg.message}
                 </div>
-                <div className={msg.fromMe ? 'text-right' : ''}>
+                <div className={`text-muted small ${message.fromMe ? 'text-right' : ''}`}>
                   {msg.fromMe ? 'You' : msg.senderName}
                 </div>
               </div>
