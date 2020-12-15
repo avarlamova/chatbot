@@ -10,7 +10,6 @@ import { SocketProvider } from '../contexts/socketProvider';
 function App() {
 
   const [login, setLogin] = useLocalStorage('login');
-  const selectedChat = true;
 
   const screen = (
     <SocketProvider login = {login}> 
@@ -18,7 +17,7 @@ function App() {
         <ChatsProvider login = {login}>
           <div className="d-flex">
           <Sidebar login = {login} />
-          {selectedChat ? <ConversationWindow /> : <div>{'chat not selected'}</div>}
+          <ConversationWindow /> 
           </div>
         </ChatsProvider>
       </ContactsProvider>

@@ -4,7 +4,7 @@ import { ListGroup } from 'react-bootstrap'
 
 
 
-export default function Contacts( {login} ) {
+export default function Contacts() {
 
     const {contacts} = useContacts()
 

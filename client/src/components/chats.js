@@ -2,18 +2,19 @@ import React from 'react'
 import { useChats } from '../contexts/chatsProvider';
 import { ListGroup } from 'react-bootstrap'
 
-export default function Chats() {
-  const { chats, selectChat } = useChats()
+export default function Conversations() {
+  const { chats, selectConversationIndex } = useChats()
 
   return (
-    <ListGroup>
+    <ListGroup variant="flush">
       {chats.map((chat, index) => (
         <ListGroup.Item
           key={index}
           action
-          onClick={() => selectChat(index)}
-          active={chat.selected}>
-          {chat.receivers.map(receiver => receiver.name.name).join(', ')}
+          onClick={() => selectConversationIndex(index)}
+          active={chat.selected}
+        >
+          {chat.receivers.map(r => r.name).join(', ')}
         </ListGroup.Item>
       ))}
     </ListGroup>

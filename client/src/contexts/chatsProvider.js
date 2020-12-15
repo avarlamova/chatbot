@@ -1,8 +1,7 @@
-import React, {useContext, useState, useEffect, useCallback} from 'react'
+import React, { useContext, useState, useEffect, useCallback } from 'react'
 import useLocalStorage from '../hooks/localstorage';
-import {useContacts} from './contactsProvider';
-import {useSocket} from './socketProvider'
-
+import { useContacts } from './contactsProvider';
+import { useSocket } from './socketProvider';
 
 const ChatsContext = React.createContext()
 
@@ -12,85 +11,82 @@ export function useChats() {
 
 export function ChatsProvider({ login, children }) {
   const [chats, setChats] = useLocalStorage('chats', [])
-  const [selectedChatIndex, setSelectedChatIndex] = useState(0)
-  const { contacts } = useContacts();
-  const socket = useSocket();
+  const [selectedConversationIndex, setSelectedConversationIndex] = useState(0)
+  const { contacts } = useContacts()
+  const socket = useSocket()
 
   function createChat(receivers) {
-    setChats(prevChats => {
-      return [...prevChats, { receivers, messages: [] }]
+    setChats(prevConversations => {
+      return [...prevConversations, { receivers, messages: [] }]
     })
   }
 
-
-//will be called 1) from server when we receive a message 2) when we send a msg
-  const addMessageToChat = useCallback (({ receivers, message, sender }) => {
-    setChats(prevChats => {
-      let hasChanged = false
-      const newMessage = { sender, message }
-      const newChats = prevChats.map(chat => {
-        if (equalArrays(chat.receivers, receivers)) {
-          hasChanged = true
+  const addMessageToConversation = useCallback(({ receivers, text, sender }) => {
+    setChats(prevConversations => {
+      let madeChange = false
+      const newMessage = { sender, text }
+      const newConversations = prevConversations.map(chat => {
+        if (arrayEquality(chat.receivers, receivers)) {
+          madeChange = true
           return {
             ...chat,
             messages: [...chat.messages, newMessage]
           }
         }
+
         return chat
       })
 
-      if (hasChanged) {
-        return newChats
+      if (madeChange) {
+        return newConversations
       } else {
         return [
-          ...prevChats,
+          ...prevConversations,
           { receivers, messages: [newMessage] }
         ]
       }
     })
-  },[setChats] )
+  }, [setChats])
 
   useEffect(() => {
-    if (socket == null) return 
-    socket.on('receive-message', addMessageToChat)
+    if (socket == null) return
+    socket.on('receive-message', addMessageToConversation)
 
-    return () => {
-      socket.off('receive-message')
-    }
-  }, [socket, addMessageToChat])
+    return () => socket.off('receive-message')
+  }, [socket, addMessageToConversation])
 
-  function sendMessage(receivers, message) {
-    socket.emit('send-message',{receivers, message})
-    addMessageToChat({ receivers, message, sender: login })
+  function sendMessage(receivers, text) {
+    socket.emit('send-message', { receivers, text })
+    addMessageToConversation({ receivers, text, sender: id })
   }
 
-  const formattedChats = chats.map((chat, index) => {
+  const formattedConversations = chats.map((chat, index) => {
     const receivers = chat.receivers.map(receiver => {
       const contact = contacts.find(contact => {
-        return contact.login === receiver
+        return contact.id === receiver
       })
       const name = (contact && contact.name) || receiver
-      return { login: receiver, name }
+      return { id: receiver, name }
     })
 
     const messages = chat.messages.map(message => {
       const contact = contacts.find(contact => {
-        return contact.login === message.sender
+        return contact.id === message.sender
       })
       const name = (contact && contact.name) || message.sender
-      const fromMe = login === message.sender
+      const fromMe = id === message.sender
       return { ...message, senderName: name, fromMe }
     })
     
-    const selected = index === selectedChatIndex
+    const selected = index === selectedConversationIndex
     return { ...chat, messages, receivers, selected }
   })
 
   const value = {
-    chats: formattedChats,
-    selectedChat: formattedChats[selectedChatIndex],
+    chats: formattedConversations,
+    selectedConversation: formattedConversations[selectedConversationIndex],
     sendMessage,
-    selectChat: setSelectedChatIndex,
+    selectConversationIndex: setSelectedConversationIndex,
     createChat
   }
 
@@ -101,11 +97,13 @@ export function ChatsProvider({ login, children }) {
   )
 }
 
-function equalArrays(arr1, arr2) {
-  if (arr1.length !== arr2.length) return false
-  arr1.sort()
-  arr2.sort()
-  return arr1.every((element, index) => {
-    return element === arr2[index]
+function arrayEquality(a, b) {
+  if (a.length !== b.length) return false
+
+  a.sort()
+  b.sort()
+
+  return a.every((element, index) => {
+    return element === b[index]
   })
 }
