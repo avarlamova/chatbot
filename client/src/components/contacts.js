@@ -7,12 +7,11 @@ import { ListGroup } from 'react-bootstrap'
 export default function Contacts() {
 
     const {contacts} = useContacts()
-
     
     return (
         <ListGroup >
           {contacts.map(contact => (
-            <ListGroup.Item action key={contact.login}
+            <ListGroup.Item  key={contact.login}
             >
               {contact.name}
             </ListGroup.Item>

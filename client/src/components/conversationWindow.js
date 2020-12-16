@@ -5,7 +5,7 @@ import { Form, InputGroup, Button } from 'react-bootstrap'
 
 export default function ConversationWindow() {
 
-  const [text, setText] = useState('')
+  const [message, setMessage] = useState('')
   const setRef = useCallback(node => {
     if (node) {
       node.scrollIntoView({ smooth: true })
@@ -15,36 +15,32 @@ export default function ConversationWindow() {
 
   function handleSubmit(e) {
     e.preventDefault()
-
-    sendMessage(
-      selectedConversation.receivers.map(r => r.id),
-      text
-    )
-    setText('')
+    sendMessage(selectedConversation.recipients.map(r => r.login), message)
+    setMessage('')
   }
 
   return (
     <div className="d-flex flex-column flex-grow-1">
       <div className="flex-grow-1 overflow-auto">
         <div className="d-flex flex-column align-items-start justify-content-end px-3">
-          {selectedConversation.messages.map((message, index) => {
+          {selectedConversation ? selectedConversation.messages.map((msg, index) => {
             const lastMessage = selectedConversation.messages.length - 1 === index
             return (
               <div
                 ref={lastMessage ? setRef : null}
                 key={index}
-                className={`my-1 d-flex flex-column ${message.fromMe ? 'align-self-end align-items-end' : 'align-items-start'}`}
+                className={`my-1 d-flex flex-column ${msg.fromMe ? 'align-self-end align-items-end' : 'align-items-start'}`}
               >
                 <div
-                  className={`rounded px-2 py-1 ${message.fromMe ? 'bg-primary text-white' : 'border'}`}>
-                  {message.text}
+                  className={`rounded px-2 py-1 ${msg.fromMe ? 'bg-primary text-white' : 'border'}`}>
+                  {msg.message}
                 </div>
-                <div className={`text-muted small ${message.fromMe ? 'text-right' : ''}`}>
-                  {message.fromMe ? 'You' : message.senderName}
+                <div className={`text-muted small ${msg.fromMe ? 'text-right' : ''}`}>
+                  {msg.fromMe ? 'You' : msg.senderName}
                 </div>
               </div>
             )
-          })}
+          }) : ''}
         </div>
       </div>
       <Form onSubmit={handleSubmit}>
@@ -53,8 +49,8 @@ export default function ConversationWindow() {
             <Form.Control
               as="textarea"
               required
-              value={text}
-              onChange={e => setText(e.target.value)}
+              value={message}
+              onChange={e => setMessage(e.target.value)}
               style={{ height: '75px', resize: 'none' }}
             />
             <InputGroup.Append>

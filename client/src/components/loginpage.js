@@ -18,7 +18,7 @@ export default function Login({setLogin}) {
         <div className="container text-center" >
             <form onSubmit={onSubmit}>
                 <label>Enter your login</label>
-                <input type="text" ref={login}  required></input>
+                <input type="text" ref={login} required></input>
                 <button className="btn btn-primary" type="submit"> Login </button>
                 <button className="btn btn-secondary" onClick={createLogin}> Get login </button>
             </form>

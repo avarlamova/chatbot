@@ -15,18 +15,18 @@ export function ChatsProvider({ login, children }) {
   const { contacts } = useContacts()
   const socket = useSocket()
 
-  function createChat(receivers) {
-    setChats(prevConversations => {
-      return [...prevConversations, { receivers, messages: [] }]
+  function createChat(recipients) {
+    setChats(prevChats => {
+      return [...prevChats, { recipients, messages: [] }]
     })
   }
 
-  const addMessageToConversation = useCallback(({ receivers, text, sender }) => {
-    setChats(prevConversations => {
+  const addMessageToConversation = useCallback(({ recipients, message, sender }) => {
+    setChats(prevChats => {
       let madeChange = false
-      const newMessage = { sender, text }
-      const newConversations = prevConversations.map(chat => {
-        if (arrayEquality(chat.receivers, receivers)) {
+      const newMessage = { sender, message }
+      const newConversations = prevChats.map(chat => {
+        if (arrayEquality(chat.recipients, recipients)) {
           madeChange = true
           return {
             ...chat,
@@ -41,8 +41,8 @@ export function ChatsProvider({ login, children }) {
         return newConversations
       } else {
         return [
-          ...prevConversations,
-          { receivers, messages: [newMessage] }
+          ...prevChats,
+          { recipients, messages: [newMessage] }
         ]
       }
     })
@@ -55,31 +55,31 @@ export function ChatsProvider({ login, children }) {
     return () => socket.off('receive-message')
   }, [socket, addMessageToConversation])
 
-  function sendMessage(receivers, text) {
-    socket.emit('send-message', { receivers, text })
-    addMessageToConversation({ receivers, text, sender: id })
+  function sendMessage(recipients, message) {
+    socket.emit('send-message', { recipients, message })
+    addMessageToConversation({ recipients, message, sender: login })
   }
 
   const formattedConversations = chats.map((chat, index) => {
-    const receivers = chat.receivers.map(receiver => {
+    const recipients = chat.recipients.map(recipient => {
       const contact = contacts.find(contact => {
-        return contact.id === receiver
+        return contact.login === recipient
       })
-      const name = (contact && contact.name) || receiver
-      return { id: receiver, name }
+      const name = (contact && contact.name) || recipient
+      return { login: recipient, name }
     })
 
     const messages = chat.messages.map(message => {
       const contact = contacts.find(contact => {
-        return contact.id === message.sender
+        return contact.login === message.sender
       })
       const name = (contact && contact.name) || message.sender
-      const fromMe = id === message.sender
+      const fromMe = login === message.sender
       return { ...message, senderName: name, fromMe }
     })
     
     const selected = index === selectedConversationIndex
-    return { ...chat, messages, receivers, selected }
+    return { ...chat, messages, recipients, selected }
   })
 
   const value = {
