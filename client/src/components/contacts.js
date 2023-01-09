@@ -1,21 +1,15 @@
-import React from 'react';
-import { useContacts } from '../contexts/contactsProvider';
-import { ListGroup } from 'react-bootstrap'
-
-
+import React from "react";
+import { useContacts } from "../contexts/contactsProvider";
+import { ListGroup } from "react-bootstrap";
 
 export default function Contacts() {
+  const { contacts } = useContacts();
 
-    const {contacts} = useContacts()
-    
-    return (
-        <ListGroup >
-          {contacts.map(contact => (
-            <ListGroup.Item  key={contact.login}
-            >
-              {contact.name}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      )
-    }
+  return (
+    <ListGroup>
+      {contacts.map((contact) => (
+        <ListGroup.Item key={contact.login}>{contact.name}</ListGroup.Item>
+      ))}
+    </ListGroup>
+  );
+}
